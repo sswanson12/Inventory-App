@@ -1,6 +1,6 @@
 <template>
 <v-sheet class="inventory">
-  <div class="filter-sort-search">
+  <v-sheet class="utility-bar elevation-6" color="primary" rounded>
     <app-button button-name="resetQueryButton"
                 button-size="large"
                 icon="mdi-restart"
@@ -37,15 +37,12 @@
                 tool-tip-location="bottom"
                 class="filter-sort-search-button">
     </app-button>
-  </div>
+  </v-sheet>
 
-  <div v-for="inventoryItem in currentlyShownItems" v-bind:key="inventoryItem.id">
-    <div class="item-container">
-      <inventory-item @delete-item="deleteItem" @edit-item="openEditModal" class="inventory-item" :inventory-item="inventoryItem"></inventory-item>
-    </div>
-    <edit-modal :inventory-item="inventoryItem"></edit-modal>
+  <div class="item-container">
+      <inventory-item v-for="inventoryItem in currentlyShownItems" v-bind:key="inventoryItem.id" @delete-item="deleteItem" @edit-item="openEditModal" class="inventory-item" :inventory-item="inventoryItem"></inventory-item>
   </div>
-
+  <edit-modal v-for="inventoryItem in currentlyShownItems" v-bind:key="inventoryItem.id" :inventory-item="inventoryItem"></edit-modal>
   <div class="addItemButtonContainer">
     <app-button class="bg-primary rounded-circle d-block float-end"
                 icon="mdi-plus"
@@ -142,13 +139,20 @@ export default {
 <style scoped>
 .inventory{
   min-height: 85vh;
+  display: block;
+  justify-content: center;
 }
 
-.filter-sort-search{
+.utility-bar{
+  padding: 20px;
   display: flex;
-  justify-content: center;
   margin-top: 10px;
-  max-height: 60px;
+  max-height: 100px;
+  width: fit-content;
+  min-width: 600px;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0px);
 }
 
 .filter-sort-search-button{
@@ -162,15 +166,16 @@ export default {
 
 .search-bar{
   max-width: 300px;
+  min-width: 200px;
   margin-right: 5px;
   margin-left: 5px;
 }
 
 .item-container{
-  display: flex;
-  justify-content: center;
-  flex-flow: wrap row;
   width: 100vw;
+  display: flex;
+  flex-flow: wrap row;
+  justify-content: center;
 }
 
 .addItemButtonContainer{
