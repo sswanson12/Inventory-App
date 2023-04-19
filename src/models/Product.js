@@ -8,8 +8,8 @@ export default class Product {
     this.description = description;
   }
 
-  setName(name){
-    if (typeof name != "string"){
+  setName(name) {
+    if (typeof name != "string") {
       return false;
     } else {
       this.name = name;
@@ -17,25 +17,25 @@ export default class Product {
     }
   }
 
-  getCategories(){
+  getCategories() {
     return this._categories;
   }
 
-  productCategoriesString() {
+  get productCategoriesString() {
     let categoriesString = "";
-    for (let i = 0; i < this._categories.length; i++){
+    for (let i = 0; i < this._categories.length; i++) {
       categoriesString += this._categories[i] + ", ";
     }
     return categoriesString.substring(0, categoriesString.length - 2);
   }
 
-  clearCategories(){
+  clearCategories() {
     this._categories = [];
     return this._categories;
   }
 
-  addCategory(category){
-    if (typeof category != "string"){
+  addCategory(category) {
+    if (typeof category != "string") {
       return false;
     } else {
       this._categories.push(category);
@@ -43,20 +43,12 @@ export default class Product {
     }
   }
 
-  removeCategory(category){
-    if (typeof category != "string"){
+  removeCategory(category) {
+    if (typeof category != "string") {
       return false;
     } else {
       this._categories.splice(this._categories.indexOf(category), 1);
       return this._categories;
-    }
-  }
-
-  setDescription(description){
-    if (typeof description != "string"){
-      return false;
-    } else {
-      this.description = description;
     }
   }
 }

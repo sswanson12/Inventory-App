@@ -22,9 +22,9 @@ export default class InventoryItemEditModel {
   }
 
   clearModel(){
-    this.inputtedName = '';
-    this.inputtedCategories = [];
-    this.inputtedDescription = '';
-    this.inputtedQty = null;
+    this.inputtedName = this.inventoryItem.product.name;
+    this.inputtedCategories = [...this.inventoryItem.product.getCategories()];
+    this.inputtedDescription = this.inventoryItem.product.description;
+    this.inputtedQty = this.inventoryItem.quantity;
   }
 }

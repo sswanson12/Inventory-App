@@ -1,7 +1,7 @@
 <template>
   <v-card :id="'inventoryItem-' + inventoryItem.id" class="inventoryItem">
     <v-card-title>{{inventoryItem.product.name}}</v-card-title>
-    <v-card-subtitle>{{inventoryItem.product.productCategoriesString()}}</v-card-subtitle>
+    <v-card-subtitle>{{inventoryItem.product.productCategoriesString}}</v-card-subtitle>
     <v-card-text>
       <div class="quantity">In stock: {{inventoryItem.quantity}}</div>
       <div>{{inventoryItem.product.description}}</div>

@@ -42,7 +42,7 @@
                     :button-action="submitForm">
         </app-button>
 
-        <app-button button-text="Clear Form&nbsp"
+        <app-button button-text="Reset&nbsp"
                     icon="mdi-restart"
                     :button-action="clearForm"
                     color="warning"

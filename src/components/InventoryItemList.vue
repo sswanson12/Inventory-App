@@ -9,18 +9,31 @@
                 class="filter-sort-search-button"
                 :button-action="resetFilters">
     </app-button>
-    <v-autocomplete
-      class="filter-sort-bar"
-      label="Filter By"
-      :items="productCategories"
-      multiple
+    <v-select
       v-model="filteredCategories"
+      :items="productCategories"
+      label="Select Item"
+      multiple
       variant="solo"
-      persistent-clear
-    ></v-autocomplete>
+      density="comfortable"
+      class="mt-1 mx-1"
+    >
+      <template v-slot:selection="{ item, index }">
+        <v-chip v-if="index < 2">
+          <span>{{ item.title }}</span>
+        </v-chip>
+        <span
+          v-if="index === 2"
+          class="text-grey text-caption align-self-center"
+        >
+          (+{{ filteredCategories.length - 2 }} others)
+        </span>
+      </template>
+    </v-select>
     <v-autocomplete
-      class="filter-sort-bar"
+      class="mt-1 mx-1"
       label="Sort By"
+      density="comfortable"
       :items="[sortCategories.NAME, sortCategories.QTY]"
       v-model="sortedBy"
       variant="solo"
@@ -106,14 +119,15 @@ export default {
     },
     openAddItemModal(){
       document.getElementById('addItemModal').style.display = "block";
-    }
+    },
   },
   computed: {
     currentlyShownItems(){
       return this.shownItems.filter((item) => {
         return item.product.name.toLowerCase().includes(this.searchString.toLowerCase())
           || item.product.description.toLowerCase().includes(this.searchString.toLowerCase());
-      }).sort((a,b) => {
+      })
+        .sort((a,b) => {
         if (this.sortedBy === this.sortCategories.NAME){
           if(a.product.name.toLowerCase() < b.product.name.toLowerCase()){
             return -1;
@@ -157,11 +171,6 @@ export default {
 
 .filter-sort-search-button{
   margin-top: 7px;
-}
-
-.filter-sort-bar{
-  max-width: 150px;
-  margin-left: 5px;
 }
 
 .search-bar{
